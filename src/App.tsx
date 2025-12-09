@@ -1,45 +1,34 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { useContext } from 'react';
+import { StatusBar } from 'react-native';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+import MainTabNavigator from './presentation/navigation/MainTabNavigator';
+import AuthStackNavigator from './presentation/navigation/AuthStackNavigator';
+import { AuthContext, AuthProvider } from './logic/context/AuthContext';
+import { CustomAlertProvider } from './logic/hooks/useCustomAlert';
 
-  return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
+function RootNavigator() {
+  const { user, loading } = useContext(AuthContext);
+
+  if (loading) return null; // 待更改：改成加载页面
+
+  return user ? <MainTabNavigator /> : <AuthStackNavigator />;
 }
 
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
+export default function App() {
   return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
+    <CustomAlertProvider>
+      <AuthProvider>
+        <NavigationContainer>
+          <StatusBar
+            backgroundColor="transparent"
+            translucent={true}
+            barStyle="dark-content"
+          />
+          <RootNavigator />
+        </NavigationContainer>
+      </AuthProvider>
+    </CustomAlertProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
-export default App;
