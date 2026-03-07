@@ -1,4 +1,5 @@
 import { Image } from 'react-native';
+
 import Theme from '../../config/themes/index';
 
 import testIcon from '../../../assets/test.png';
@@ -13,13 +14,7 @@ const labels = {
 const mainTabNavigatorStyle = ({ route }) => {
   return {
     //标题
-    headerShown: true,
-    headerStyle: {
-      backgroundColor: 'transparent',
-      elevation: 0,
-      shadowOpacity: 0,
-      height: 34,
-    },
+    headerShown: false,
     //屏幕
     sceneStyle: {},
     //底部导航栏
