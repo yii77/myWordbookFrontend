@@ -4,4 +4,7 @@ export const API_ENDPOINTS = {
   login: `${API_BASE_URL}/myWordbook/auth/login`,
   check: `${API_BASE_URL}/myWordbook/auth/check`,
   getAccessToken: `${API_BASE_URL}/myWordbook/auth/getAccessToken`,
+  uploadZip: `${API_BASE_URL}/myWordbook/zip/upload`,
+  getWordbooks: `${API_BASE_URL}/myWordbook/wordbook/view`,
+  downloadWordbook: `${API_BASE_URL}/myWordbook/wordbook/download`,
 };
