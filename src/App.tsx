@@ -1,8 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { StatusBar } from 'react-native';
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
+
+import { initDB } from './data/database/db';
 
 import { AuthContext, AuthProvider } from './logic/context/AuthContext';
 import { CustomAlertProvider } from './logic/hooks/useCustomAlert';
@@ -19,6 +21,10 @@ function RootNavigator() {
 }
 
 export default function App() {
+  useEffect(() => {
+    initDB();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <CustomAlertProvider>
